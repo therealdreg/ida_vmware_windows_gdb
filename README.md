@@ -21,6 +21,34 @@ More info:
 - Advanced Windows Kernel Debugging with VMWare and IDA’s GDB debugger: https://hex-rays.com/blog/advanced-windows-kernel-debugging-with-vmware-and-idas-gdb-debugger/
 - IDA Help Debugging with VMWare: https://hex-rays.com/products/ida/support/idadoc/1357.shtml
 
+# Some possible problems
+
+```
+The crash is in ulm.c
+
+Without more details, part of it means that I'm guessing here, but there's a very high probability that it stands for "User Level Monitor" as it does elsewhere whenever VMware mentions "ulm".
+
+As such that means your VM is running on a host with Hyper-V mode enabled.
+
+That codepath is pretty new and is most likely why you are getting this issue.
+The most likely workaround would be to disable Hyper-V mode at the host level.
+This might not be an option for you though.
+
+If it is then the steps to disable the Hyper-V role is to run the following command at the host in windows command-line with Administrator privileges:
+
+bcdedit /set hypervisorlaunchtype off
+Reboot the system to activate it.
+
+If you want to go back to Hyper-V mode again, then you can enable it like this:
+
+bcdedit /set hypervisorlaunchtype auto
+ 
+
+hope this helps,
+```
+
+- https://communities.vmware.com/t5/VMware-Workstation-Pro/Crash-after-resuming-execution-from-gdb-stub/td-p/2824667
+
 ## Demo video
 
 https://youtu.be/q5MrGKqtmAg
