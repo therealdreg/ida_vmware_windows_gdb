@@ -23,6 +23,8 @@ More info:
 
 # Some possible problems
 
+How to solve Crash after resuming execution from gdb stub and/or crash after breakpoint:
+
 ```
 The crash is in ulm.c
 
